@@ -27,7 +27,7 @@ let rightPressed = false;
 let leftPressed = false;
 
 // Sensibilidad paleta
-const PADDLE_SENSIBILITY = 7;
+const PADDLE_SENSITIVITY = 7;
 
 /* Funciones */
 function drawBall() {
@@ -77,12 +77,12 @@ function ballMovement() {
   y += dy;
 }
 
-//Movimiento paleta
+//Movimiento paleta y colisión con canvas
 function paddleMovement() {
-  if (rightPressed) {
-    paddleX += PADDLE_SENSIBILITY;
-  } else if (leftPressed) {
-    paddleX -= PADDLE_SENSIBILITY;
+  if (rightPressed && paddleX < canvas.width - paddleWidth) {
+    paddleX += PADDLE_SENSITIVITY;
+  } else if (leftPressed && paddleX > 0) {
+    paddleX -= PADDLE_SENSITIVITY;
   }
 }
 
