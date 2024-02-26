@@ -249,6 +249,8 @@ function winGame() {
     document.querySelector("canvas").style.display = "none";
     document.querySelector(".menu").style.display = "flex";
     document.querySelector(".win").style.display = "block";
+    document.querySelector(".title").style.display = "none";
+    document.querySelector("#start").style.display = "none";
   }
 }
 
