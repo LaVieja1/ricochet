@@ -14,7 +14,7 @@ let y = canvas.height - 30;
 
 // Velocidad de la pelota
 let dx = 2;
-let dy = -2; // - para abajo + para arriba
+let dy = -2; // + para abajo - para arriba
 
 /* Funciones */
 function drawBall() {
@@ -31,6 +31,24 @@ function drawBricks() {}
 function collisionDetection() {}
 
 function ballMovement() {
+  //Rebote de la pelota lateral
+  if (
+    x + dx > canvas.width - ballRadius || // Pared derecha
+    x + dx < ballRadius // Pared izquierda
+  ) {
+    dx = -dx;
+  }
+
+  //Rebote de la pelota arriba
+  if (y + dy < ballRadius) {
+    dy = -dy;
+  }
+
+  if (y + dy > canvas.height - ballRadius) {
+    console.log("GAME OVER");
+    document.location.reload();
+  }
+
   x += dx;
   y += dy;
 }
