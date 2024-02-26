@@ -39,6 +39,11 @@ body {
   transform: scale(1.1);
 }
 
+.win {
+  display: none;
+  color: #16b911;
+}
+
 .title {
   color: #ff0000;
   font-size: 3rem;

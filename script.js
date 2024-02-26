@@ -147,15 +147,11 @@ function collisionDetection() {
       if (isBallSameXAsBrick && isBallSameYAsBrick) {
         dy = -dy;
         currentBrick.hits++;
-        currentBrick.status = BRICK_STATUS.BROKEN;
-      }
-
-      if (currentBrick.hits === 1) {
-        currentBrick.status = BRICK_STATUS.DAMAGED;
-      }
-
-      if (currentBrick.hits === 2) {
-        currentBrick.status = BRICK_STATUS.BROKEN;
+        if (currentBrick.hits === 1) {
+          currentBrick.status = BRICK_STATUS.DAMAGED;
+        } else if (currentBrick.hits === 2) {
+          currentBrick.status = BRICK_STATUS.BROKEN;
+        }
       }
     }
   }
@@ -234,6 +230,28 @@ function initEvents() {
   }
 }
 
+function winGame() {
+  let allBricksBroken = true;
+
+  for (let c = 0; c < brickColumnCount; c++) {
+    for (let r = 0; r < brickRowsCount; r++) {
+      if (bricks[c][r].status !== BRICK_STATUS.BROKEN) {
+        allBricksBroken = false;
+        break;
+      }
+    }
+    if (!allBricksBroken) {
+      break;
+    }
+  }
+
+  if (allBricksBroken) {
+    document.querySelector("canvas").style.display = "none";
+    document.querySelector(".menu").style.display = "flex";
+    document.querySelector(".win").style.display = "block";
+  }
+}
+
 // Se ejecuta en cada frame
 function draw() {
   // Limpia el canvas
@@ -248,6 +266,8 @@ function draw() {
   collisionDetection();
   ballMovement();
   paddleMovement();
+
+  winGame();
 
   window.requestAnimationFrame(draw);
 }
