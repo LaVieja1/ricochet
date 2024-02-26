@@ -29,6 +29,39 @@ let paddleY = canvas.height - paddleHeight - 10;
 let rightPressed = false;
 let leftPressed = false;
 
+/* Variables de los ladrillos */
+const brickRowsCount = 6;
+const brickColumnCount = 13;
+const brickWidth = 30;
+const brickHeight = 14;
+const brickPadding = 2;
+const brickOffsetTop = 60;
+const brickOffsetLeft = 18;
+const bricks = [];
+
+const BRICK_STATUS = {
+  ACTIVE: 1,
+  BROKEN: 0,
+};
+
+for (let c = 0; c < brickColumnCount; c++) {
+  bricks[c] = []; // Inicia con array vacío
+  for (let r = 0; r < brickRowsCount; r++) {
+    // Calculamos la posición del ladrillo en el canvas
+    const brickX = c * (brickWidth + brickPadding) + brickOffsetLeft;
+    const brickY = r * (brickHeight + brickPadding) + brickOffsetTop;
+    // Asignar un color aleatorio a cada ladrillo
+    const random = Math.floor(Math.random() * 11);
+    // Guardamos la información de cada ladrillo
+    bricks[c][r] = {
+      x: brickX,
+      y: brickY,
+      status: BRICK_STATUS.ACTIVE,
+      color: random,
+    };
+  }
+}
+
 // Sensibilidad paleta
 const PADDLE_SENSITIVITY = 7;
 
@@ -55,7 +88,22 @@ function drawPaddle() {
   );
 }
 
-function drawBricks() {}
+function drawBricks() {
+  for (let c = 0; c < brickColumnCount; c++) {
+    for (let r = 0; r < brickRowsCount; r++) {
+      const currentBrick = bricks[c][r];
+      // Saltar a la siguente iteración si esta destruido
+      if (currentBrick.status === BRICK_STATUS.BROKEN) continue;
+
+      ctx.fillStyle = "yellow";
+      // Dibujar el ladrillo
+      ctx.rect(currentBrick.x, currentBrick.y, brickWidth, brickHeight);
+      ctx.strokeStyle = "#000";
+      ctx.stroke();
+      ctx.fill();
+    }
+  }
+}
 
 function collisionDetection() {}
 
