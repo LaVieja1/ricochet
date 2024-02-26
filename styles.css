@@ -9,8 +9,9 @@ body,
 body {
   background-color: #111;
   display: flex;
-  justify-content: center;
-  align-items: start;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
 }
 
 .menu {
@@ -73,4 +74,39 @@ footer {
 a {
   color: white;
   text-decoration: none;
+}
+
+a:hover {
+  color: #16b911;
+}
+
+.controls {
+  display: none;
+}
+
+@media screen and (max-width: 380px) {
+  .menu {
+    margin-top: 10px;
+  }
+
+  .controls {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .controls button {
+    font-size: 2rem;
+    padding: 20px 40px;
+    border: 4px solid #16b911;
+    background-color: black;
+    color: #16b911;
+  }
+
+  canvas {
+    width: 90vw;
+    height: 80vh;
+  }
 }

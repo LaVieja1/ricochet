@@ -11,6 +11,9 @@ const brickBrokenSound = document.querySelector("#brickBroken");
 const winGameSound = document.querySelector("#winGame");
 const gameOverSound = document.querySelector("#gameOver");
 
+const moveLeftBtn = document.getElementById("leftBtn");
+const moveRightBtn = document.getElementById("rightBtn");
+
 musicSound.volume = 0.2;
 musicSound.play();
 musicSound.loop = true;
@@ -242,6 +245,24 @@ function cleanCanvas() {
 function initEvents() {
   document.addEventListener("keydown", keyDownHandler);
   document.addEventListener("keyup", keyUpHandler);
+
+  // Agrega eventos de clic a los botones de movimiento
+  // Agrega eventos de clic a los botones de movimiento táctil
+  moveLeftBtn.addEventListener("touchstart", function () {
+    leftPressed = true;
+  });
+
+  moveRightBtn.addEventListener("touchstart", function () {
+    rightPressed = true;
+  });
+
+  moveLeftBtn.addEventListener("touchend", function () {
+    leftPressed = false;
+  });
+
+  moveRightBtn.addEventListener("touchend", function () {
+    rightPressed = false;
+  });
 
   // Apreta una tecla
   function keyDownHandler(event) {
