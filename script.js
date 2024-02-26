@@ -23,6 +23,12 @@ const paddleWidth = 50;
 let paddleX = (canvas.width - paddleWidth) / 2; // Dibuja la paleta en el centro;
 let paddleY = canvas.height - paddleHeight - 10;
 
+let rightPressed = false;
+let leftPressed = false;
+
+// Sensibilidad paleta
+const PADDLE_SENSIBILITY = 7;
+
 /* Funciones */
 function drawBall() {
   ctx.beginPath(); // Inicia el trazado
@@ -71,10 +77,42 @@ function ballMovement() {
   y += dy;
 }
 
-function paddleMovement() {}
+//Movimiento paleta
+function paddleMovement() {
+  if (rightPressed) {
+    paddleX += PADDLE_SENSIBILITY;
+  } else if (leftPressed) {
+    paddleX -= PADDLE_SENSIBILITY;
+  }
+}
 
 function cleanCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function initEvents() {
+  document.addEventListener("keydown", keyDownHandler);
+  document.addEventListener("keyup", keyUpHandler);
+
+  // Apreta una tecla
+  function keyDownHandler(event) {
+    const { key } = event;
+    if (key === "Right" || key === "ArrowRight" || key === "d") {
+      rightPressed = true;
+    } else if (key === "Left" || key === "ArrowLeft" || key === "a") {
+      leftPressed = true;
+    }
+  }
+
+  // Suelta una tecla
+  function keyUpHandler(event) {
+    const { key } = event;
+    if (key === "Right" || key === "ArrowRight" || key === "d") {
+      rightPressed = false;
+    } else if (key === "Left" || key === "ArrowLeft" || key === "a") {
+      leftPressed = false;
+    }
+  }
 }
 
 // Se ejecuta en cada frame
@@ -96,3 +134,4 @@ function draw() {
 }
 
 draw();
+initEvents();
