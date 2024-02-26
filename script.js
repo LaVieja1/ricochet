@@ -32,11 +32,11 @@ let leftPressed = false;
 /* Variables de los ladrillos */
 const brickRowsCount = 6;
 const brickColumnCount = 13;
-const brickWidth = 30;
-const brickHeight = 14;
-const brickPadding = 2;
+const brickWidth = 32;
+const brickHeight = 16;
+const brickPadding = 0;
 const brickOffsetTop = 60;
-const brickOffsetLeft = 18;
+const brickOffsetLeft = 16;
 const bricks = [];
 
 const BRICK_STATUS = {
@@ -101,8 +101,8 @@ function drawBricks() {
         $sprite,
         0,
         clipY,
-        32,
-        16,
+        brickWidth,
+        brickHeight,
         currentBrick.x,
         currentBrick.y,
         brickWidth,
