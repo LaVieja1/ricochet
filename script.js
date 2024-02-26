@@ -26,7 +26,7 @@ canvas.height = 500;
 let difficulty = 3;
 
 /* Variables de la pelota */
-const ballRadius = 3;
+let ballRadius = 3;
 
 // Posición de la pelota
 let x = canvas.width / 2;
@@ -325,11 +325,13 @@ function setDifficulty(newDifficulty) {
       brickRowsCount = 3;
       dx = 3;
       dy = -3;
+      ballRadius = 5;
       break;
     case 2:
       brickRowsCount = 6;
       dx = 3;
       dy = -3;
+      ballRadius = 4;
       break;
     case 3:
       paddleClipX = 96;

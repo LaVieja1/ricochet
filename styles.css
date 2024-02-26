@@ -84,7 +84,7 @@ a:hover {
   display: none;
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 800px) {
   .menu {
     margin-top: 10px;
   }
