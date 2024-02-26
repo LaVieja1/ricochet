@@ -4,6 +4,17 @@ const ctx = canvas.getContext("2d");
 const $sprite = document.querySelector("#sprite");
 const $bricks = document.querySelector("#bricks");
 
+const musicSound = document.querySelector("#music");
+const startGameSound = document.querySelector("#startGame");
+const brickHitSound = document.querySelector("#brickHit");
+const brickBrokenSound = document.querySelector("#brickBroken");
+const winGameSound = document.querySelector("#winGame");
+const gameOverSound = document.querySelector("#gameOver");
+
+musicSound.volume = 0.2;
+musicSound.play();
+musicSound.loop = true;
+
 // Resolución
 canvas.width = 448;
 canvas.height = 500;
@@ -152,8 +163,12 @@ function collisionDetection() {
         currentBrick.hits++;
         if (currentBrick.hits === 1) {
           currentBrick.status = BRICK_STATUS.DAMAGED;
+          brickHitSound.volume = 0.4;
+          brickHitSound.play();
         } else if (currentBrick.hits === 2) {
           currentBrick.status = BRICK_STATUS.BROKEN;
+          brickBrokenSound.volume = 0.2;
+          brickBrokenSound.play();
         }
       }
     }
@@ -194,6 +209,12 @@ function ballMovement() {
     document.querySelectorAll(".menu button").forEach((button) => {
       button.classList.add("hidden");
     });
+
+    gameOverSound.volume = 0.2;
+    gameOverSound.play();
+    musicSound.volume = 0;
+
+    //Reinicia el juego en 2 segundos;
     setTimeout(() => {
       document.location.reload();
     }, 2000);
@@ -262,7 +283,11 @@ function winGame() {
     document.querySelector(".menu").style.display = "flex";
     document.querySelector(".win").style.display = "block";
     document.querySelector(".title").style.display = "none";
-    document.querySelector("#start").style.display = "none";
+    document.querySelectorAll(".menu button").forEach((button) => {
+      button.classList.add("hidden");
+    });
+
+    winGameSound.play();
   }
 }
 
@@ -273,6 +298,8 @@ function setDifficulty(newDifficulty) {
   switch (difficulty) {
     case 1:
       brickRowsCount = 3;
+      dx = 3;
+      dy = -3;
       break;
     case 2:
       brickRowsCount = 6;
@@ -305,12 +332,14 @@ function draw() {
 }
 
 function menu() {
+  startGameSound.volume = 0.2;
   document.querySelector("canvas").style.display = "none";
 
   document.getElementById("easyBtn").addEventListener("click", function () {
     setDifficulty(1);
     document.querySelector(".menu").style.display = "none";
     document.querySelector("canvas").style.display = "block";
+    startGameSound.play();
     draw();
   });
 
@@ -318,6 +347,7 @@ function menu() {
     setDifficulty(2);
     document.querySelector(".menu").style.display = "none";
     document.querySelector("canvas").style.display = "block";
+    startGameSound.play();
     draw();
   });
 
@@ -325,6 +355,7 @@ function menu() {
     setDifficulty(3);
     document.querySelector(".menu").style.display = "none";
     document.querySelector("canvas").style.display = "block";
+    startGameSound.play();
     draw();
   });
 }
