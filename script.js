@@ -102,7 +102,7 @@ function drawBricks() {
         0,
         clipY,
         brickWidth,
-        brickHeight,
+        10,
         currentBrick.x,
         currentBrick.y,
         brickWidth,
@@ -112,7 +112,26 @@ function drawBricks() {
   }
 }
 
-function collisionDetection() {}
+function collisionDetection() {
+  for (let c = 0; c < brickColumnCount; c++) {
+    for (let r = 0; r < brickRowsCount; r++) {
+      const currentBrick = bricks[c][r];
+      // Saltar a la siguente iteración si esta destruido
+      if (currentBrick.status === BRICK_STATUS.BROKEN) continue;
+
+      const isBallSameXAsBrick =
+        x > currentBrick.x && x < currentBrick.x + brickWidth;
+
+      const isBallSameYAsBrick =
+        y > currentBrick.y && y < currentBrick.y + brickHeight;
+
+      if (isBallSameXAsBrick && isBallSameYAsBrick) {
+        dy = -dy;
+        currentBrick.status = BRICK_STATUS.BROKEN;
+      }
+    }
+  }
+}
 
 function ballMovement() {
   //Rebote de la pelota lateral
