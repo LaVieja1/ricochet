@@ -1,6 +1,9 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
+const $sprite = document.querySelector("#sprite");
+const $bricks = document.querySelector("#bricks");
+
 // Resolución
 canvas.width = 448;
 canvas.height = 400;
@@ -39,12 +42,16 @@ function drawBall() {
 }
 
 function drawPaddle() {
-  ctx.fillStyle = "red";
-  ctx.fillRect(
-    paddleX, // Coordenada X
-    paddleY, // Coordenada Y
-    paddleWidth, // Ancho del dibujo
-    paddleHeight // Alto del dibujo
+  ctx.drawImage(
+    $sprite, // Imagen a dibujar
+    40,
+    400,
+    paddleWidth,
+    paddleHeight,
+    paddleX,
+    paddleY,
+    paddleWidth,
+    paddleHeight
   );
 }
 
