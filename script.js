@@ -141,11 +141,13 @@ function collisionDetection() {
         x > currentBrick.x && x < currentBrick.x + brickWidth;
 
       const isBallSameYAsBrick =
-        y > currentBrick.y && y < currentBrick.y + brickHeight;
+        y > currentBrick.y + brickPadding + ballRadius &&
+        y < currentBrick.y + brickHeight + brickPadding + ballRadius;
 
       if (isBallSameXAsBrick && isBallSameYAsBrick) {
         dy = -dy;
         currentBrick.hits++;
+        currentBrick.status = BRICK_STATUS.BROKEN;
       }
 
       if (currentBrick.hits === 1) {
