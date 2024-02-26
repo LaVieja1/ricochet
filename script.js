@@ -13,8 +13,8 @@ let x = canvas.width / 2;
 let y = canvas.height - 30;
 
 // Velocidad/Dirección de la pelota
-let dx = 2; // + para derecha - para izquierda
-let dy = -2; // + para abajo - para arriba
+let dx = 3; // + para derecha - para izquierda
+let dy = -3; // + para abajo - para arriba
 
 /* Variables de la paleta */
 const paddleHeight = 10;
@@ -66,8 +66,18 @@ function ballMovement() {
     dy = -dy;
   }
 
-  //Pelota cae al suelo
-  if (y + dy > canvas.height - ballRadius) {
+  const isBallSameXAsPaddle = x > paddleX && x < paddleX + paddleWidth; //Si la pelota esta en la misma x que la paleta
+
+  const isBallTouchingPaddle = y + dy > paddleY; //Si la pelota toca la paleta
+
+  //Pelota toca la paleta
+  if (isBallTouchingPaddle && isBallSameXAsPaddle) {
+    dy = -dy; //Rebote
+  } else if (
+    //Pelota cae al suelo
+    y + dy >
+    canvas.height - ballRadius
+  ) {
     console.log("GAME OVER");
     document.location.reload();
   }
