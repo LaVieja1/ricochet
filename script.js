@@ -252,5 +252,14 @@ function draw() {
   window.requestAnimationFrame(draw);
 }
 
-draw();
+function menu() {
+  document.querySelector("canvas").style.display = "none";
+  document.querySelector("#start").addEventListener("click", () => {
+    document.querySelector(".menu").style.display = "none";
+    document.querySelector("canvas").style.display = "block";
+    draw();
+  });
+}
+
+menu();
 initEvents();

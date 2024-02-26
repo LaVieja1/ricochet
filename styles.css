@@ -1,5 +1,47 @@
+html,
+body,
+:root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 body {
   background-color: #111;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+.menu {
+  border: 4px solid #fff;
+  background: url(./Backround_Tiles.png) repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 20px;
+}
+
+.menu button {
+  font-size: 2rem;
+  padding-inline: 16px;
+  color: #16b911;
+  border-radius: 0;
+  border: 4px solid #16b911;
+  background-color: #111;
+  transition: all ease-in-out;
+}
+
+.menu button:hover {
+  transform: scale(1.1);
+}
+
+.title {
+  color: #ff0000;
+  font-size: 3rem;
 }
 
 canvas {
