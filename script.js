@@ -6,7 +6,7 @@ const $bricks = document.querySelector("#bricks");
 
 // Resolución
 canvas.width = 448;
-canvas.height = 400;
+canvas.height = 500;
 
 /* Variables de la pelota */
 const ballRadius = 3;
@@ -33,10 +33,10 @@ let leftPressed = false;
 const brickRowsCount = 6;
 const brickColumnCount = 13;
 const brickWidth = 32;
-const brickHeight = 16;
-const brickPadding = 0;
+const brickHeight = 20;
+const brickPadding = 1;
 const brickOffsetTop = 60;
-const brickOffsetLeft = 16;
+const brickOffsetLeft = 10;
 const bricks = [];
 
 const BRICK_STATUS = {
@@ -51,7 +51,7 @@ for (let c = 0; c < brickColumnCount; c++) {
     const brickX = c * (brickWidth + brickPadding) + brickOffsetLeft;
     const brickY = r * (brickHeight + brickPadding) + brickOffsetTop;
     // Asignar un color aleatorio a cada ladrillo
-    const random = Math.floor(Math.random() * 10);
+    const random = Math.floor(Math.random() * 8);
     // Guardamos la información de cada ladrillo
     bricks[c][r] = {
       x: brickX,
