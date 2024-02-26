@@ -51,7 +51,7 @@ for (let c = 0; c < brickColumnCount; c++) {
     const brickX = c * (brickWidth + brickPadding) + brickOffsetLeft;
     const brickY = r * (brickHeight + brickPadding) + brickOffsetTop;
     // Asignar un color aleatorio a cada ladrillo
-    const random = Math.floor(Math.random() * 11);
+    const random = Math.floor(Math.random() * 10);
     // Guardamos la información de cada ladrillo
     bricks[c][r] = {
       x: brickX,
@@ -95,12 +95,19 @@ function drawBricks() {
       // Saltar a la siguente iteración si esta destruido
       if (currentBrick.status === BRICK_STATUS.BROKEN) continue;
 
-      ctx.fillStyle = "yellow";
-      // Dibujar el ladrillo
-      ctx.rect(currentBrick.x, currentBrick.y, brickWidth, brickHeight);
-      ctx.strokeStyle = "#000";
-      ctx.stroke();
-      ctx.fill();
+      const clipY = currentBrick.color * 16;
+
+      ctx.drawImage(
+        $sprite,
+        0,
+        clipY,
+        32,
+        16,
+        currentBrick.x,
+        currentBrick.y,
+        brickWidth,
+        brickHeight
+      );
     }
   }
 }
