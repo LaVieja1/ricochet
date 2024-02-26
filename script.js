@@ -40,7 +40,8 @@ const brickOffsetLeft = 10;
 const bricks = [];
 
 const BRICK_STATUS = {
-  ACTIVE: 1,
+  NEW: 2,
+  DAMAGED: 1,
   BROKEN: 0,
 };
 
@@ -56,7 +57,8 @@ for (let c = 0; c < brickColumnCount; c++) {
     bricks[c][r] = {
       x: brickX,
       y: brickY,
-      status: BRICK_STATUS.ACTIVE,
+      hits: 0,
+      status: BRICK_STATUS.NEW,
       color: random,
     };
   }
@@ -108,6 +110,22 @@ function drawBricks() {
         brickWidth,
         brickHeight
       );
+
+      if (currentBrick.status === BRICK_STATUS.DAMAGED) {
+        const clipY = currentBrick.color * 32;
+
+        ctx.drawImage(
+          $sprite,
+          576,
+          clipY,
+          64,
+          32,
+          currentBrick.x,
+          currentBrick.y,
+          brickWidth,
+          brickHeight
+        );
+      }
     }
   }
 }
@@ -127,6 +145,14 @@ function collisionDetection() {
 
       if (isBallSameXAsBrick && isBallSameYAsBrick) {
         dy = -dy;
+        currentBrick.hits++;
+      }
+
+      if (currentBrick.hits === 1) {
+        currentBrick.status = BRICK_STATUS.DAMAGED;
+      }
+
+      if (currentBrick.hits === 2) {
         currentBrick.status = BRICK_STATUS.BROKEN;
       }
     }
