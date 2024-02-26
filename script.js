@@ -29,10 +29,21 @@ function drawPaddle() {}
 function drawBricks() {}
 
 function collisionDetection() {}
-function ballMovement() {}
+
+function ballMovement() {
+  x += dx;
+  y += dy;
+}
+
 function paddleMovement() {}
 
+function cleanCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
 function draw() {
+  // Limpia el canvas en cada frame
+  cleanCanvas();
   //Dibujar elementos
   drawBall();
   drawPaddle();
