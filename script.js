@@ -38,7 +38,7 @@ let dy = -5; // + para abajo - para arriba
 
 /* Variables de la paleta */
 const paddleHeight = 10;
-const paddleWidth = 50;
+const paddleWidth = 80;
 
 let paddleX = (canvas.width - paddleWidth) / 2; // Dibuja la paleta en el centro;
 let paddleY = canvas.height - paddleHeight - 10;
@@ -96,7 +96,7 @@ function drawBall() {
 function drawPaddle() {
   ctx.drawImage(
     $sprite, // Imagen a dibujar
-    40,
+    167,
     400,
     paddleWidth,
     paddleHeight,
