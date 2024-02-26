@@ -95,14 +95,14 @@ function drawBricks() {
       // Saltar a la siguente iteración si esta destruido
       if (currentBrick.status === BRICK_STATUS.BROKEN) continue;
 
-      const clipY = currentBrick.color * 16;
+      const clipY = currentBrick.color * 32;
 
       ctx.drawImage(
         $sprite,
-        0,
+        448,
         clipY,
-        brickWidth,
-        10,
+        64,
+        32,
         currentBrick.x,
         currentBrick.y,
         brickWidth,
