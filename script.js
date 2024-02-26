@@ -8,6 +8,9 @@ const $bricks = document.querySelector("#bricks");
 canvas.width = 448;
 canvas.height = 500;
 
+// Dificultad
+let difficulty = 3;
+
 /* Variables de la pelota */
 const ballRadius = 3;
 
@@ -16,8 +19,8 @@ let x = canvas.width / 2;
 let y = canvas.height - 30;
 
 // Velocidad/Dirección de la pelota
-let dx = 3; // + para derecha - para izquierda
-let dy = -3; // + para abajo - para arriba
+let dx = 5; // + para derecha - para izquierda
+let dy = -5; // + para abajo - para arriba
 
 /* Variables de la paleta */
 const paddleHeight = 10;
@@ -30,7 +33,7 @@ let rightPressed = false;
 let leftPressed = false;
 
 /* Variables de los ladrillos */
-const brickRowsCount = 6;
+let brickRowsCount = 9;
 const brickColumnCount = 13;
 const brickWidth = 32;
 const brickHeight = 20;
@@ -65,7 +68,7 @@ for (let c = 0; c < brickColumnCount; c++) {
 }
 
 // Sensibilidad paleta
-const PADDLE_SENSITIVITY = 7;
+let paddle_sensitivity = 7;
 
 /* Funciones */
 function drawBall() {
@@ -183,8 +186,17 @@ function ballMovement() {
     y + dy >
     canvas.height - ballRadius
   ) {
-    console.log("GAME OVER");
-    document.location.reload();
+    document.querySelector("canvas").style.display = "none";
+    document.querySelector(".menu").style.display = "flex";
+    document.querySelector(".win").style.display = "none";
+    document.querySelector(".title").style.display = "block";
+    document.querySelector(".title").textContent = "GAME OVER";
+    document.querySelectorAll(".menu button").forEach((button) => {
+      button.classList.add("hidden");
+    });
+    setTimeout(() => {
+      document.location.reload();
+    }, 2000);
   }
 
   //Mover la pelota
@@ -195,9 +207,9 @@ function ballMovement() {
 //Movimiento paleta y colisión con canvas
 function paddleMovement() {
   if (rightPressed && paddleX < canvas.width - paddleWidth) {
-    paddleX += PADDLE_SENSITIVITY;
+    paddleX += paddle_sensitivity;
   } else if (leftPressed && paddleX > 0) {
-    paddleX -= PADDLE_SENSITIVITY;
+    paddleX -= paddle_sensitivity;
   }
 }
 
@@ -254,6 +266,24 @@ function winGame() {
   }
 }
 
+function setDifficulty(newDifficulty) {
+  difficulty = newDifficulty;
+
+  // Caracteriscas de la dificultad
+  switch (difficulty) {
+    case 1:
+      brickRowsCount = 3;
+      break;
+    case 2:
+      brickRowsCount = 6;
+      dx = 3;
+      dy = -3;
+      break;
+    case 3:
+      break;
+  }
+}
+
 // Se ejecuta en cada frame
 function draw() {
   // Limpia el canvas
@@ -276,7 +306,23 @@ function draw() {
 
 function menu() {
   document.querySelector("canvas").style.display = "none";
-  document.querySelector("#start").addEventListener("click", () => {
+
+  document.getElementById("easyBtn").addEventListener("click", function () {
+    setDifficulty(1);
+    document.querySelector(".menu").style.display = "none";
+    document.querySelector("canvas").style.display = "block";
+    draw();
+  });
+
+  document.getElementById("mediumBtn").addEventListener("click", function () {
+    setDifficulty(2);
+    document.querySelector(".menu").style.display = "none";
+    document.querySelector("canvas").style.display = "block";
+    draw();
+  });
+
+  document.getElementById("hardBtn").addEventListener("click", function () {
+    setDifficulty(3);
     document.querySelector(".menu").style.display = "none";
     document.querySelector("canvas").style.display = "block";
     draw();

@@ -23,17 +23,18 @@ body {
   width: 300px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   padding: 20px;
-  margin-top: 250px;
+  margin-top: 200px;
 }
 
 .menu button {
   font-size: 2rem;
-  padding-inline: 16px;
+  width: 200px;
   color: #16b911;
   border-radius: 0;
   border: 4px solid #16b911;
   background-color: #111;
   transition: all ease-in-out;
+  margin-bottom: 20px;
 }
 
 .menu button:hover {
@@ -48,6 +49,8 @@ body {
 .title {
   color: #ff0000;
   font-size: 3rem;
+  width: 100%;
+  text-align: center;
 }
 
 canvas {
@@ -56,4 +59,8 @@ canvas {
   background: url(./Backround_Tiles.png) repeat;
   margin: 0 auto;
   display: block;
+}
+
+.hidden {
+  display: none;
 }
