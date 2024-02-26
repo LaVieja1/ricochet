@@ -206,6 +206,7 @@ function ballMovement() {
     document.querySelector(".win").style.display = "none";
     document.querySelector(".title").style.display = "block";
     document.querySelector(".title").textContent = "GAME OVER";
+    document.querySelector("footer").style.display = "none";
     document.querySelectorAll(".menu button").forEach((button) => {
       button.classList.add("hidden");
     });
@@ -283,6 +284,7 @@ function winGame() {
     document.querySelector(".menu").style.display = "flex";
     document.querySelector(".win").style.display = "block";
     document.querySelector(".title").style.display = "none";
+    document.querySelector("footer").style.display = "none";
     document.querySelectorAll(".menu button").forEach((button) => {
       button.classList.add("hidden");
     });
@@ -340,6 +342,7 @@ function menu() {
     document.querySelector(".menu").style.display = "none";
     document.querySelector("canvas").style.display = "block";
     startGameSound.play();
+    musicSound.play();
     draw();
   });
 
@@ -348,6 +351,7 @@ function menu() {
     document.querySelector(".menu").style.display = "none";
     document.querySelector("canvas").style.display = "block";
     startGameSound.play();
+    musicSound.play();
     draw();
   });
 
@@ -356,6 +360,7 @@ function menu() {
     document.querySelector(".menu").style.display = "none";
     document.querySelector("canvas").style.display = "block";
     startGameSound.play();
+    musicSound.play();
     draw();
   });
 }
